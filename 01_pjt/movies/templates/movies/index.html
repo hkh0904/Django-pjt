@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block content %}
+<h1 class="fw-bold" style="margin: 20px">INDEX</h1>
+{% if request.user.is_authenticated %}
+<h4><a class="fw-bold text-decoration-none" style="margin: 20px" href="{% url 'movies:create' %}">CREATE</a>
+</h4>
+{% else %}
+<h4 style="margin: 20px" class="fw-bold">
+  로그인 후 글을 작성하실 수 있습니다.
+</h4>
+{% endif %}
+<hr style="margin-bottom: 0" />
+{% for movie in movies %}
+<p style="margin-top: 16px">
+  <h5><a class="fw-bold text-decoration-none" style="margin: 20px" href="{% url 'movies:detail' movie.pk %}">{{movie.title}}</a></h5>
+</p>
+<p></p>
+<h6 class="fw-bold" style="margin: 20px">Score : {{movie.score}}</h6>
+<hr style="margin-bottom: 0" />
+{% endfor %} {% endblock content %}

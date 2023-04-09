@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="fw-bold">UPDATE</h1><hr>
+<form action="{% url 'movies:update' movie.pk %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form layout="horizontal"%}
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <input type="submit" class="btn btn-success" value="UPDATE">
+    <input class="btn btn-primary" type="reset" value="Reset">
+    <a class="btn btn-secondary" href="{% url 'movies:detail' movie.pk %}" role="button">BACK</a>
+    </div>
+</form>
+
+{% endblock content %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% load bootstrap5 %} {% block content %}
+<div style="margin: 20px">
+  <h1>UPDATE</h1>
+  <hr />
+  <form
+    action="{% url 'movies:update' movie.pk %}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %} {% bootstrap_form form %}
+    <div class="container">
+      <div class="row">
+        <input class="col offset-10 btn btn-warning" type="reset" />
+        <input class="col btn btn-primary" type="submit" />
+      </div>
+    </div>
+  </form>
+  <hr />
+  <div class="container">
+    <div class="row">
+      <div class="offset-11 col">
+        <a
+          class="btn btn-success fw-bold text-decoration-none"
+          href="{% url 'movies:index' %}"
+          >BACK</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<hr style="margin=0" />
+
+{% endblock content %}
+
+
+
+
+
+
+
+{% comment %} 
+
+
+{% extends 'base.html' %} {% block content %}
+<h1>UPDATE</h1>
+<hr />
+<form
+  action="{% url 'movies:update' movie.pk %}"
+  method="POST"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %} {{ form.as_p }}
+  <input type="reset">
+  <input type="submit" />
+</form>
+<hr />
+<a href="{% url 'movies:detail' movie.pk %}">BACK</a>
+{% endblock content %} {% endcomment %}

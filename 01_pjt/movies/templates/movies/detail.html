@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block content %}
+<div style="margin: 20px">
+  <h1 class="fw-bold">DETAIL</h1>
+  <hr />
+  <h5>{{movie.title}}</h5>
+  <h5>Audience : {{movie.audience}}</h5>
+  <h5>Release Dates : {{movie.release_date}}</h5>
+  <h5>Genre : {{movie.genre}}</h5>
+  <h5>Score : {{movie.score}}</h5>
+  <h5>poster_url : {{movie.poster_url}}</h5>
+  {% if movie.actor_image %}
+  <h5>Actor :</h5>
+  <img src="{{movie.actor_image.url}}" alt="" />
+  {% endif %}
+  <h5>{{movie.description}}</h5>
+  <hr />
+</div>
+{% if request.user.is_authenticated %}
+<div class="container">
+  <div class="row">
+    <div class="col-1 offset-10">
+      <a
+        class="btn btn-primary fw-bold text-decoration-none"
+          href="{% url 'movies:update' movie.pk %}"
+        >UPDATE</a
+      >
+    </div>
+    <form
+      class="col-1"
+      action="{% url 'movies:delete' movie.pk %}"
+      method="POST"
+    >
+      {% csrf_token %}
+      <input class="btn btn-danger" type="submit" value="DELETE" />
+    </form>
+  </div>
+  <hr />
+</div>
+
+{% endif %}
+
+<div class="container">
+  <div class="row">
+    <div class="offset-11 col">
+      <a
+        class="btn btn-success fw-bold text-decoration-none"
+        href="{% url 'movies:index' %}"
+        >BACK</a
+      >
+    </div>
+  </div>
+</div>
+<hr style="margin-bottom: 0" />
+{% endblock content %}
