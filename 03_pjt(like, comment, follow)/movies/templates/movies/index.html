@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% load bootstrap5 %} {% block content %}
+<h1 class="fw-bold">INDEX</h1>
+<div class="text-end">
+  <a class="btn btn-primary btn-sm" href="{% url 'movies:create' %}"
+    >New Create</a
+  >
+</div>
+<hr />
+{% for movie in movies %}
+<a class="fw-bold text-secondary" style="text-decoration:none" href="{% url 'movies:detail' movie.pk %}"
+  ><h4 class="fw-bold" >제목 : {{ movie.title }}</h4></a
+>
+<div class="text-end">
+  <p>
+    <b
+      >작성자 :
+      <a class="fw-bold text-secondary" style="text-decoration:none" href="{% url 'accounts:profile' movie.user.username %}"
+        >{{ movie.user }}</a
+      ></b
+    >
+  </p>
+  <p class="fw-bold">LIKE : {{movie.like_users.count}}</p>
+  <form action="{% url 'movies:likes' movie.pk %}" method="post">
+    {% csrf_token %} {% if user in movie.like_users.all %}
+    <input
+      type="submit"
+      value="좋아요 취소"
+      class="btn btn-outline-danger btn-sm"
+    />
+    {% else %}
+    <input
+      type="submit"
+      value="좋아요"
+      class="btn btn-sm text-white"
+      style="background-color: #ff5c5c"
+    />
+    {% endif %}
+  </form>
+</div>
+<hr />
+{% endfor %} {% endblock %}

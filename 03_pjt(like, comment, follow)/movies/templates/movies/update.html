@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1 class="fw-bold">UPDATE</h1>
+  <hr>
+  <form action="{% url 'movies:update' movie.pk %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <div class="text-end">
+    <input type="reset" class="btn btn-info btn-sm" value="Reset">
+    <input type="submit" class="btn btn-primary btn-sm" value="Update"></div>
+  </form>
+  <div class="text-end"><a href="{% url 'movies:detail' movie.pk %}" class="btn btn-secondary btn-sm mt-1">Back</a></div>
+  <hr>
+
+{% endblock %}
