@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block content %}
+  <h1>Movies</h1>
+<hr />
+{% for movie in movies %}
+<h3><strong>제목 : {{ movie.title }}</strong></h3>
+<img src="{{movie.poster_path}}" style="width: 200px;">
+<h6>개봉일 : {{ movie.release_date }}</h6>
+<h6>장르 : {% for genre in movie.genres.all %}{{genre.name}} {% endfor %}</h6>
+<h6>평점 : {{ movie.vote_average }}</h6>
+<a href="{% url 'movies:detail' movie.pk %}">상세보기</a>
+<hr />
+{% endfor %} {% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1><strong>{{user.username}}님 맞춤 추천영화 10</strong></h1>
+<hr>
+<h1>{{name}} 영화 추천</h1><br>
+{% for movie in li %}
+<h3><strong>타이틀 : {{movie.title}}</strong></h3>
+<img src="{{movie.poster_path}}" style="width:30%">
+<br><br>
+<ul>
+  <li>평점 : {{movie.vote_average}}</li>
+  <li>장르 : {% for genre in movie.genres.all %}{{genre.name}} {% endfor %}</li>
+  <li>상세보기 : <a href="{% url 'movies:detail' movie.pk %}">영화 세부 정보</a></li><br>
+</ul>
+{% endfor %}
+
+<br>
+<a href="{% url 'movies:index' %}">[목록으로]</a>
+<br><br>
+{% endblock %}
